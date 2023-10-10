@@ -10,8 +10,8 @@ alertmanager:
     - name: "null"
     - name: 'email-notifications'
       email_configs:
-      - to: <your-password>
+      - to: <your-email>
         from: 'alertmanager@example.com'
         smarthost: 'smtp.gmail.com:587'
-        auth_username: <your-password>
+        auth_username: <your-username>
         auth_password: <your-password>

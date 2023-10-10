@@ -3,20 +3,13 @@ kind: PrometheusRule
 metadata:
   labels:
     release: prometheus
-    prometheus: kube-prometheus-stack-prometheus
-    role: alert-rules
   name: nginx-app-rules
 spec:
   groups:
     - name: "nginx-app-rules"
       rules:
-        - alert: PodDown
-          for: 1m
-          expr: sum(up{job="your-service-monitor-name"}) < 1 or absent(up{job="your-service-monitor-name"})
-          annotations:
-            message: The deployment has less than 1 pod running.
         - alert: HighCPUUsage
-          expr: (sum(rate(container_cpu_usage_seconds_total{container_name!="POD"}[2m])) / sum(machine_cpu_cores)) * 100 > 50
+          expr: (sum(rate(container_cpu_usage_seconds_total{container_name!="POD"}[2m])) / sum(machine_cpu_cores)) * 100 > 5
           for: 1m
           labels:
             severity: warning
@@ -24,7 +17,7 @@ spec:
             summary: High CPU Usage
             description: CPU usage is above 50%
         - alert: HighMemoryUsage
-          expr: (sum(container_memory_usage_bytes{container_name!="POD"}) / sum(machine_memory_bytes)) * 100 > 50
+          expr: (sum(container_memory_usage_bytes{container_name!="POD"}) / sum(machine_memory_bytes)) * 100 > 5
           for: 1m
           labels:
             severity: warning
