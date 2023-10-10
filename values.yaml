@@ -1,0 +1,17 @@
+grafana:
+  adminPassword: highly-secure-production-password
+
+alertmanager:
+  config:
+    route: 
+      group_by: ['alertname', 'severity']
+      receiver: 'email-notifications'
+    receivers:
+    - name: "null"
+    - name: 'email-notifications'
+      email_configs:
+      - to: <your-password>
+        from: 'alertmanager@example.com'
+        smarthost: 'smtp.gmail.com:587'
+        auth_username: <your-password>
+        auth_password: <your-password>
