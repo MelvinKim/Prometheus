@@ -6,7 +6,7 @@ metadata:
   name: nginx-app-rules
 spec:
   groups:
-    - name: "nginx-app-rules"
+    - name: nginx
       rules:
         - alert: HighCPUUsage
           expr: (sum(rate(container_cpu_usage_seconds_total{container_name!="POD"}[2m])) / sum(machine_cpu_cores)) * 100 > 5

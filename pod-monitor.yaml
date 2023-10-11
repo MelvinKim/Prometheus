@@ -2,12 +2,14 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: nginx-pod-monitor
-  release: prometheus
-  app: prometheus
+  labels:
+    release: prometheus
+    app: prometheus
 spec:
   selector:
     matchLabels:
       app: nginx
   podMetricsEndpoints:
-    - port: nginx-port
+    - port: nginx-pod-port
       interval: 30s
+      path: /metrics

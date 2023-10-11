@@ -20,6 +20,6 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: nginx-port
-            containerPort: 5000
+          - name: nginx-pod-port
+            containerPort: 5050
             protocol: TCP

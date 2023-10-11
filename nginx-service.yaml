@@ -3,12 +3,14 @@ kind: Service
 metadata:
   name: nginx-svc
   labels:
-    job: nginx-api
+    job: nginx
     app: nginx
 spec:
+  type: ClusterIP
   selector:
-    app: myapp
+    app: nginx
   ports:
-  - port: 5000
-    targetPort: 5000
-    protocol: TCP
+    - name: nginx-port
+      port: 5050
+      targetPort: 5050
+      protocol: TCP
