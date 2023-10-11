@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: calert-configmap
+data:
+  config.toml: |
+    [app]
+    address = "127.0.0.1:10003"
+    server_timeout = "60s"
+    enable_request_logs = true
+    log = "info"
+
+    [providers.prometheus-monitoring]
+    type = "google_chat"
+    endpoint = "https://chat.googleapis.com/v1/spaces/AAAA1Tp2qTA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=b8fYNO7Aml5SDm4rwbUAQkpBMVS7-_STHwMYoStZsDc"
+    max_idle_conns =  50
+    timeout = "30s"
+    template = "/etc/calert/message.tmpl"
+    thread_ttl = "12h"
+    dry_run = false

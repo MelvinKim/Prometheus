@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: calert-alerts
+  labels:
+    resource: prometheus
+spec:
+  route:
+    groupBy: ['alertname', 'room']
+    groupWait: 1m
+    groupInterval: 2m
+    repeatInterval: 2m
+    receiver: "google-chat-notifications"
+  receivers:
+    - name: "google-chat-notifications"
+      webhookConfigs:
+        - url: "http://calert.svc.cluster.local:6000/create?room_name=monitoring"

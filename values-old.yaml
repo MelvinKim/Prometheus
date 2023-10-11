@@ -1,0 +1,28 @@
+grafana:
+  adminPassword: highly-secure-production-password
+
+alertmanager:
+  config:
+    route: 
+      group_by: ['alertname', 'severity']
+      receiver: 'google-chat-notifications'
+      groupWait: 30s
+      groupInterval: 2m
+      repeatInterval: 2m
+    receivers:
+    - name: "null"
+    # - name: 'email-notifications'
+    #   email_configs:
+    #   - to: 'melobruk1@gmail.com'
+    #     from: 'melobruk1@gmail.com'
+    #     smarthost: 'smtp.gmail.com:587'
+    #     auth_username: 'melobruk1@gmail.com'
+    #     auth_password: 'nnmuswejzexmlfkq'
+    #     send_resolved: true
+    - name: 'google-chat-notifications'
+      webhook_configs:
+      - send_resolved: true
+        url: "http://calert.svc.cluster.local:6000/create?room_name=monitoring"
+    alertmanagerConfigSelector:
+      matchlabels:
+        resource: prometheus

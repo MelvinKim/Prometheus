@@ -1,0 +1,4 @@
+configmap:
+  rooms: |
+    [monitoring]
+    notification_url = "https://chat.googleapis.com/v1/spaces/AAAAjRsVsBA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=oRFGJbwimDsjQ3XCIwFmHDrZIqFIEWnhtwlERXajY2E"

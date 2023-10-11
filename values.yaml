@@ -3,15 +3,15 @@ grafana:
 
 alertmanager:
   config:
-    route: 
-      group_by: ['alertname', 'severity']
-      receiver: 'email-notifications'
+    route:
+      receiver: "null"
+      routes:
+      - match:
+          severity: critical
+        receiver: google-chat
+        group_by: [alertname]
     receivers:
     - name: "null"
-    - name: 'email-notifications'
-      email_configs:
-      - to: <your-email>
-        from: 'alertmanager@example.com'
-        smarthost: 'smtp.gmail.com:587'
-        auth_username: <your-email>
-        auth_password: <your-app-password>
+    - name: 'google-chat'
+      webhook_configs:
+      - url: "http://127.0.0.1:6000/create?room_name=app.chat.monitoring"

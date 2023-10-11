@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calert
+spec:
+  selector:
+    matchLabels:
+      app: calert
+  template:
+    metadata:
+      labels:
+        app: calert
+    spec:
+      containers:
+      - name: calert
+        image: mrkaran/calert:v1.2.0
+        command:
+          - "--config=./config.toml"
+        volumeMounts:
+          - name: calert-configmap
+            mountPath: /app/config.toml
+          # - mountPath: /etc/calert/message.tmpl
+          #   name: calert-message-template
+        resources:
+          limits:
+            memory: "300Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6000
+      volumes:
+        - name: calert-configmap
+          configMap:
+            name: calert-configmap
+        # - name: calert-message-template
+        #   configMap:
+        #     name: calert-message-template

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: calert-message-template
+data:
+  message.tmpl: |
+    *[ {{.Status | Title }} ]  {{ .Labels.alertname | Title }}  -  ( {{.Labels.severity | toUpper }} )*
+
+    {{ range .Annotations.SortedPairs -}}
+
+    {{ .Name | Title }}: {{ .Value}}
+
+    {{ end -}}

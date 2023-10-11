@@ -15,3 +15,23 @@ spec:
     - name: "webhook"
       webhookConfigs:
         - url: "http://example.com/"
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: alert-config-two
+  labels:
+    resource: prometheus
+spec:
+  route:
+    groupBy: ["alertname"]
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: "webhook"
+    routes:
+      - matchers:
+          - name: job
+            value: kubernetes
+        receiver: "infra"
+        groupBy: ["severity"] 

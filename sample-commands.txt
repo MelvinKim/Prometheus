@@ -1,0 +1,4 @@
+1. sudo systemctl restart node-exporter && sudo systemctl status node-exporter
+2. kubectl replace -f prometheus-config-map.yaml 
+3. kubectl rollout restart deployment/<deployment-name> -n <namespace>
+4. sudo systemctl daemon-reload
