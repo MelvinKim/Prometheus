@@ -13,5 +13,5 @@ alertmanager:
       - to: <your-email>
         from: 'alertmanager@example.com'
         smarthost: 'smtp.gmail.com:587'
-        auth_username: <your-username>
-        auth_password: <your-password>
+        auth_username: <your-email>
+        auth_password: <your-app-password>
